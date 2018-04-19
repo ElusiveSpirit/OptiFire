@@ -17,10 +17,10 @@ defmodule OptifireWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    resources "/pictures", PictureController
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", OptifireWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", OptifireWeb do
+    pipe_through :api
+  end
 end

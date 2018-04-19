@@ -1,0 +1,27 @@
+<h2>Show Picture</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @picture.name %>
+  </li>
+
+  <li>
+    <strong>Color:</strong>
+    <%= @picture.color %>
+    <div style="width: 100px;height: 100px; background: <%= rgb_color(@picture) %>"></div>
+  </li>
+
+  <li>
+    <img src="<%= original_picture @picture, :thumb %>" height="100">
+  </li>
+
+  <li>
+    <img src="<%= original_picture @picture, :original %>" height="100">
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: picture_path(@conn, :edit, @picture) %></span>
+<span><%= link "Back", to: picture_path(@conn, :index) %></span>
