@@ -18,7 +18,7 @@
         <div style="width: 100px;height: 100px; background: <%= rgb_color(picture) %>"></div>
       </td>
       <td>
-        <img src="<%= original_picture picture, :thumb %>" height="100">
+        <img src="<%= small_picture picture, :thumb %>" height="100">
       </td>
 
       <td class="text-right">

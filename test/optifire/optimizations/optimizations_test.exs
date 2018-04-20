@@ -6,10 +6,13 @@ defmodule Optifire.OptimizationsTest do
   describe "pictures" do
     alias Optifire.Optimizations.Picture
 
-    @valid_attrs %{color: "some color", name: "some name", original: "some original"}
-    @update_attrs %{color: "some updated color", name: "some updated name", original: "some updated original"}
-    @invalid_attrs %{color: nil, name: nil, original: nil}
+    @image %{name: "net_image.jpg", path: "test/fixtures/net_image.jpg", color: "52,59,79"}
+    @plug_image %Plug.Upload{path: @image.path, filename: @image.name}
 
+    @valid_attrs %{"original" => @plug_image}
+    @update_attrs %{"original" => @plug_image}
+    @invalid_attrs %{"original" => nil}
+  
     def picture_fixture(attrs \\ %{}) do
       {:ok, picture} =
         attrs
@@ -31,9 +34,9 @@ defmodule Optifire.OptimizationsTest do
 
     test "create_picture/1 with valid data creates a picture" do
       assert {:ok, %Picture{} = picture} = Optimizations.create_picture(@valid_attrs)
-      assert picture.color == "some color"
-      assert picture.name == "some name"
-      assert picture.original == "some original"
+      assert picture.name == @image.name
+      assert %{file_name: "net_image.jpg"} = picture.original
+      assert picture.color == @image.color
     end
 
     test "create_picture/1 with invalid data returns error changeset" do
@@ -44,9 +47,9 @@ defmodule Optifire.OptimizationsTest do
       picture = picture_fixture()
       assert {:ok, picture} = Optimizations.update_picture(picture, @update_attrs)
       assert %Picture{} = picture
-      assert picture.color == "some updated color"
-      assert picture.name == "some updated name"
-      assert picture.original == "some updated original"
+      assert picture.name == @image.name
+      assert %{file_name: "net_image.jpg"} = picture.original
+      assert picture.color == @image.color
     end
 
     test "update_picture/2 with invalid data returns error changeset" do

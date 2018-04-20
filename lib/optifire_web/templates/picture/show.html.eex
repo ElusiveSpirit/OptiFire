@@ -14,11 +14,11 @@
   </li>
 
   <li>
-    <img src="<%= original_picture @picture, :thumb %>" height="100">
+    <img src="<%= small_picture @picture, :thumb %>" height="100">
   </li>
 
   <li>
-    <img src="<%= original_picture @picture, :original %>" height="100">
+    <img src="<%= original_picture @picture %>" height="400">
   </li>
 
 </ul>

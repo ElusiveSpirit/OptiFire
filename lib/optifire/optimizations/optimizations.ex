@@ -51,7 +51,7 @@ defmodule Optifire.Optimizations do
   """
   def create_picture(attrs \\ %{}) do
     %Picture{}
-    |> Picture.create_changeset(attrs)
+    |> Picture.changeset(attrs)
     |> Repo.insert()
   end
 

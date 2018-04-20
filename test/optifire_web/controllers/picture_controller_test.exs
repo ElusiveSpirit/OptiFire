@@ -3,9 +3,11 @@ defmodule OptifireWeb.PictureControllerTest do
 
   alias Optifire.Optimizations
 
-  @create_attrs %{color: "some color", name: "some name", original: "some original"}
-  @update_attrs %{color: "some updated color", name: "some updated name", original: "some updated original"}
-  @invalid_attrs %{color: nil, name: nil, original: nil}
+  @test_image %Plug.Upload{path: "test/fixtures/net_image.jpg", filename: "net_image.jpg"}
+
+  @create_attrs %{original: @test_image}
+  @update_attrs %{original: @test_image}
+  @invalid_attrs %{original: nil}
 
   def fixture(:picture) do
     {:ok, picture} = Optimizations.create_picture(@create_attrs)
@@ -60,7 +62,7 @@ defmodule OptifireWeb.PictureControllerTest do
       assert redirected_to(conn) == picture_path(conn, :show, picture)
 
       conn = get conn, picture_path(conn, :show, picture)
-      assert html_response(conn, 200) =~ "some updated color"
+      assert html_response(conn, 200) =~ "Picture updated successfully"
     end
 
     test "renders errors when data is invalid", %{conn: conn, picture: picture} do
